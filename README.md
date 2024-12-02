@@ -53,6 +53,11 @@ OR
 npm run start
 ```
 
+# How to access the application
+
+The application is accessible locally here: http://localhost:4200
+
+
 # How to code
 
 ## Framework

@@ -1,0 +1,20 @@
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.no-quizzes {
+  text-align: center;
+  margin-top: 3rem;
+}
+.no-quizzes p {
+  margin-bottom: 1rem;
+  color: #666;
+}
+mat-list-item {
+  margin-bottom: 0.5rem;
+}
+[matListItemMeta] {
+  display: flex;
+  gap: 0.5rem;
+}

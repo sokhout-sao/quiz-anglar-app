@@ -1,0 +1,57 @@
+<div class="container">
+  <mat-card *ngIf="currentQuestion">
+    <div class="header-actions">
+      <button mat-button (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+        Back
+      </button>
+      <button mat-button (click)="nextQuestion()">
+        <mat-icon>skip_next</mat-icon>
+        Next Question
+      </button>
+    </div>
+
+    <mat-card-content>
+      <div class="question-content">
+        <h2 class="question-text">{{ currentQuestion.sentence }}</h2>
+
+        <div *ngIf="!showAnswer" class="show-answer-section">
+          <button mat-raised-button color="primary" (click)="showAnswer = true">
+            See Response
+          </button>
+        </div>
+
+        <div *ngIf="showAnswer" class="answer-section">
+          <div class="answer-text">{{ currentQuestion.response }}</div>
+
+          <div class="response-level-section">
+            <p>How well did you know this answer?</p>
+            <div class="response-buttons">
+              <button
+                mat-raised-button
+                color="primary"
+                (click)="updateResponseLevel('GOOD')"
+              >
+                Good
+              </button>
+              <button
+                mat-raised-button
+                color="accent"
+                (click)="updateResponseLevel('MODERATE')"
+              >
+                Moderate
+              </button>
+              <button
+                mat-raised-button
+                color="warn"
+                (click)="updateResponseLevel('BAD')"
+              >
+                Bad
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>
+  {{ data.mode === "create" ? "Add Question" : "Edit Question" }}
+</h2>
+<mat-dialog-content>
+  <form [formGroup]="questionForm">
+    <mat-form-field class="full-width">
+      <mat-label>Question</mat-label>
+      <textarea
+        matInput
+        formControlName="sentence"
+        required
+        rows="3"
+      ></textarea>
+      <mat-error *ngIf="questionForm.get('sentence')?.errors?.['required']">
+        Question is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Answer</mat-label>
+      <textarea
+        matInput
+        formControlName="response"
+        required
+        rows="3"
+      ></textarea>
+      <mat-error *ngIf="questionForm.get('response')?.errors?.['required']">
+        Answer is required
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="questionForm.invalid"
+    (click)="onSubmit()"
+  >
+    {{ data.mode === "create" ? "Add" : "Save" }}
+  </button>
+</mat-dialog-actions>

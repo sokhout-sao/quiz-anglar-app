@@ -1,0 +1,91 @@
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{
+        isEditing ? "Edit Quiz" : "Create Quiz"
+      }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="quizForm" (ngSubmit)="onSubmit()">
+        <div class="header-actions">
+          <button mat-button type="button" (click)="goBack()">
+            <mat-icon>arrow_back</mat-icon>
+            Back
+          </button>
+          <mat-form-field class="title-field">
+            <mat-label>Quiz Title</mat-label>
+            <input matInput formControlName="title" required />
+            <mat-error *ngIf="quizForm.get('title')?.errors?.['required']">
+              Title is required
+            </mat-error>
+          </mat-form-field>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="quizForm.invalid || isLoading"
+          >
+            {{ isLoading ? "Saving..." : "Save" }}
+          </button>
+        </div>
+
+        <div class="questions-section">
+          <div class="questions-header">
+            <h3>Questions</h3>
+            <button
+              mat-raised-button
+              color="accent"
+              type="button"
+              (click)="addQuestion()"
+            >
+              <mat-icon>add</mat-icon>
+              Add Question
+            </button>
+          </div>
+
+          <mat-nav-list *ngIf="questions.length > 0">
+            <mat-list-item
+              *ngFor="let question of questions"
+              click-no-dispatch
+              (click)="editQuestion(question)"
+            >
+              <span matListItemTitle>{{ question.sentence }}</span>
+              <div matListItemMeta>
+                <button
+                  mat-icon-button
+                  color="accent"
+                  type="button"
+                  click-no-dispatch
+                  (click)="editQuestion(question)"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  color="warn"
+                  type="button"
+                  click-no-dispatch
+                  (click)="deleteQuestion(question)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </mat-list-item>
+          </mat-nav-list>
+
+          <div *ngIf="questions.length === 0" class="no-questions">
+            <p>No questions added yet.</p>
+            <button
+              mat-raised-button
+              color="accent"
+              type="button"
+              (click)="addQuestion()"
+            >
+              Add Your First Question
+            </button>
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

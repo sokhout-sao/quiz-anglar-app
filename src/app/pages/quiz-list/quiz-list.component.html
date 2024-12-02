@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="header-actions">
+    <button mat-raised-button color="primary" (click)="createQuiz($event)">
+      <mat-icon>add</mat-icon>
+      Create Quiz
+    </button>
+    <button mat-raised-button color="accent" (click)="importQuizzes()">
+      <mat-icon>upload</mat-icon>
+      Import
+    </button>
+    <button mat-raised-button color="accent" (click)="exportQuizzes()">
+      <mat-icon>download</mat-icon>
+      Export
+    </button>
+  </div>
+
+  <mat-nav-list *ngIf="quizzes.length > 0">
+    <mat-list-item
+      *ngFor="let quiz of quizzes"
+      (click)="editQuiz($event, quiz)"
+    >
+      <span matListItemTitle>{{ quiz.title }} blabbla</span>
+      <div matListItemMeta>
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="playQuiz($event, quiz)"
+        >
+          <mat-icon>play_arrow</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" (click)="editQuiz($event, quiz)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteQuiz($event, quiz)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-list-item>
+  </mat-nav-list>
+
+  <div *ngIf="quizzes.length === 0" class="no-quizzes">
+    <p>You haven't created any quizzes yet.</p>
+    <button mat-raised-button color="primary" (click)="createQuiz($event)">
+      Create Your First Quiz
+    </button>
+  </div>
+
+  <input
+    type="file"
+    #fileInput
+    style="display: none"
+    (change)="onFileSelected($event)"
+    accept=".json"
+  />
+</div>
