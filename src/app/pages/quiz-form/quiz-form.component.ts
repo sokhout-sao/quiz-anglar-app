@@ -61,6 +61,7 @@ export class QuizFormComponent implements OnInit {
     dialogRef.afterClosed().subscribe((question: Question | undefined) => {
       if (question) {
         this.questions.push(question);
+        this.onSubmit();
       }
     });
   }
