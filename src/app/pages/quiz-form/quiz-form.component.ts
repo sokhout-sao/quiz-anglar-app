@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router, ActivatedRoute } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
-import { QuizService, Quiz, Question } from "../../services/quiz.service";
+import { Question, Quiz, QuizService } from "../../services/quiz.service";
 import { QuestionFormDialogComponent } from "./question-form-dialog/question-form-dialog.component";
 
 @Component({
@@ -87,6 +87,7 @@ export class QuizFormComponent implements OnInit {
     if (confirm("Are you sure you want to delete this question?")) {
       const index = this.questions.indexOf(question);
       this.questions.splice(index, 1);
+      this.onSubmit();
     }
   }
 
@@ -126,6 +127,10 @@ export class QuizFormComponent implements OnInit {
         this.isLoading = false;
       }
     }
+  }
+
+  playQuiz() {
+    this.router.navigate(["/quizzes/play", this.quizId]);
   }
 
   goBack() {

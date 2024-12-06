@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { UserService, User } from './user.service';
+import { Injectable } from "@angular/core";
+import { User, UserService } from "./user.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AuthService {
   private currentUser: User | null = null;
 
   constructor(private userService: UserService) {
-    const savedUser = localStorage.getItem('currentUser');
+    const savedUser = localStorage.getItem("currentUser");
     if (savedUser) {
       this.currentUser = JSON.parse(savedUser);
     }
@@ -19,12 +19,12 @@ export class AuthService {
       const user = await this.userService.getUserByUsername(username);
       if (user && user.password === password) {
         this.currentUser = user;
-        localStorage.setItem('currentUser', JSON.stringify(user));
+        localStorage.setItem("currentUser", JSON.stringify(user));
         return true;
       }
       return false;
     } catch (error) {
-      console.error('Error during signin:', error);
+      console.error("Error during signin:", error);
       return false;
     }
   }
@@ -35,21 +35,21 @@ export class AuthService {
       if (existingUser) {
         return false;
       }
-      
+
       const newUser: User = { username, password };
       await this.userService.addUser(newUser);
       this.currentUser = newUser;
-      localStorage.setItem('currentUser', JSON.stringify(newUser));
+      localStorage.setItem("currentUser", JSON.stringify(newUser));
       return true;
     } catch (error) {
-      console.error('Error during signup:', error);
+      console.error("Error during signup:", error);
       return false;
     }
   }
 
   logout(): void {
     this.currentUser = null;
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem("currentUser");
   }
 
   isAuthenticated(): boolean {

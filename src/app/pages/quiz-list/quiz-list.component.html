@@ -1,55 +1,68 @@
-<div class="container">
-  <div class="header-actions">
-    <button mat-raised-button color="primary" (click)="createQuiz($event)">
+<mat-card appearance="outlined">
+  <mat-card-header class="header">
+    <mat-card-title>Quizzes</mat-card-title>
+    <span class="flex-spacer"></span>
+    <button mat-flat-button color="primary" (click)="createQuiz($event)">
       <mat-icon>add</mat-icon>
       Create Quiz
     </button>
-    <button mat-raised-button color="accent" (click)="importQuizzes()">
+    <button mat-flat-button color="accent" (click)="importQuizzes()">
       <mat-icon>upload</mat-icon>
       Import
     </button>
-    <button mat-raised-button color="accent" (click)="exportQuizzes()">
+    <button mat-flat-button color="warn" (click)="exportQuizzes()">
       <mat-icon>download</mat-icon>
       Export
     </button>
-  </div>
+  </mat-card-header>
 
-  <mat-nav-list *ngIf="quizzes.length > 0">
-    <mat-list-item
-      *ngFor="let quiz of quizzes"
-      (click)="editQuiz($event, quiz)"
-    >
-      <span matListItemTitle>{{ quiz.title }} blabbla</span>
-      <div matListItemMeta>
-        <button
-          mat-icon-button
-          color="primary"
-          (click)="playQuiz($event, quiz)"
-        >
-          <mat-icon>play_arrow</mat-icon>
-        </button>
-        <button mat-icon-button color="accent" (click)="editQuiz($event, quiz)">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" (click)="deleteQuiz($event, quiz)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
-    </mat-list-item>
-  </mat-nav-list>
+  <mat-card-content>
+    <mat-nav-list *ngIf="quizzes.length > 0">
+      @for (quiz of quizzes; track $index) {
+      <mat-divider></mat-divider>
+      <mat-list-item (click)="editQuiz($event, quiz)">
+        <span matListItemTitle>{{ quiz.title }}</span>
+        <div matListItemMeta>
+          <button
+            *ngIf="quiz.questions.length > 0"
+            mat-icon-button
+            color="primary"
+            (click)="playQuiz($event, quiz)"
+          >
+            <mat-icon>play_arrow</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="accent"
+            (click)="editQuiz($event, quiz)"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="warn"
+            (click)="deleteQuiz($event, quiz)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
+      }
+    </mat-nav-list>
 
-  <div *ngIf="quizzes.length === 0" class="no-quizzes">
-    <p>You haven't created any quizzes yet.</p>
-    <button mat-raised-button color="primary" (click)="createQuiz($event)">
-      Create Your First Quiz
-    </button>
-  </div>
+    <div *ngIf="quizzes.length === 0" class="no-quizzes">
+      <p>You haven't created any quizzes yet.</p>
+      <button mat-flat-button color="primary" (click)="createQuiz($event)">
+        Create Your First Quiz
+      </button>
+    </div>
 
-  <input
-    type="file"
-    #fileInput
-    style="display: none"
-    (change)="onFileSelected($event)"
-    accept=".json"
-  />
-</div>
+    <input
+      type="file"
+      #fileInput
+      style="display: none"
+      (change)="onFileSelected($event)"
+      accept=".json"
+    />
+  </mat-card-content>
+</mat-card>

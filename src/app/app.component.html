@@ -1,0 +1,15 @@
+<mat-toolbar class="app-toolbar">
+  <img src="assets/images/angular.svg" width="50" />
+  <span>Ng Quiz App!</span>
+  <span class="flex-spacer"></span>
+  <button
+    *ngIf="authService.isAuthenticated()"
+    (click)="logout()"
+    mat-flat-button
+  >
+    <mat-icon>logout</mat-icon>Logout
+  </button>
+</mat-toolbar>
+<div class="content-below-toolbar">
+  <router-outlet></router-outlet>
+</div>

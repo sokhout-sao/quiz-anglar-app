@@ -1,14 +1,5 @@
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
 .title-field {
   flex: 1;
-}
-.questions-section {
-  margin-top: 2rem;
 }
 .questions-header {
   display: flex;
@@ -20,11 +11,4 @@
   text-align: center;
   margin: 2rem 0;
   color: #666;
-}
-mat-list-item {
-  margin-bottom: 0.5rem;
-}
-[matListItemMeta] {
-  display: flex;
-  gap: 0.5rem;
 }

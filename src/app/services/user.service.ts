@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { DatabaseService } from './database.service';
+import { Injectable } from "@angular/core";
+import { DatabaseService } from "./database.service";
 
 export interface User {
   username: string;
@@ -7,7 +7,7 @@ export interface User {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class UserService {
   constructor(private db: DatabaseService) {}
@@ -15,7 +15,7 @@ export class UserService {
   async getUsers(): Promise<User[]> {
     return new Promise((resolve, reject) => {
       try {
-        const store = this.db.getStore('users', 'readonly');
+        const store = this.db.getStore("users", "readonly");
         const request = store.getAll();
 
         request.onsuccess = () => {
@@ -34,7 +34,7 @@ export class UserService {
   async addUser(user: User): Promise<void> {
     return new Promise((resolve, reject) => {
       try {
-        const store = this.db.getStore('users', 'readwrite');
+        const store = this.db.getStore("users", "readwrite");
         const request = store.add(user);
 
         request.onsuccess = () => {
@@ -53,7 +53,7 @@ export class UserService {
   async getUserByUsername(username: string): Promise<User | undefined> {
     return new Promise((resolve, reject) => {
       try {
-        const store = this.db.getStore('users', 'readonly');
+        const store = this.db.getStore("users", "readonly");
         const request = store.get(username);
 
         request.onsuccess = () => {

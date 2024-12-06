@@ -1,84 +1,82 @@
-<div class="container">
-  <mat-card class="auth-card">
-    <mat-card-header>
-      <mat-card-title>Sign Up</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-        <mat-form-field class="full-width">
-          <mat-label>Username</mat-label>
-          <input matInput formControlName="username" required />
-          <mat-error *ngIf="signupForm.get('username')?.errors?.['required']">
-            Username is required
-          </mat-error>
-          <mat-error *ngIf="signupForm.get('username')?.errors?.['pattern']">
-            Username must contain only alphanumeric characters
-          </mat-error>
-        </mat-form-field>
+<mat-card appearance="outlined" class="auth-card">
+  <mat-card-header>
+    <mat-card-title>Sign Up</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="full-width">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" required />
+        <mat-error *ngIf="signupForm.get('username')?.errors?.['required']">
+          Username is required
+        </mat-error>
+        <mat-error *ngIf="signupForm.get('username')?.errors?.['pattern']">
+          Username must contain only alphanumeric characters
+        </mat-error>
+      </mat-form-field>
 
-        <mat-form-field class="full-width">
-          <mat-label>Password</mat-label>
-          <input matInput type="password" formControlName="password" required />
-          <mat-error *ngIf="signupForm.get('password')?.errors?.['required']">
-            Password is required
-          </mat-error>
-          <mat-error *ngIf="signupForm.get('password')?.errors?.['minlength']">
-            Password must be at least 8 characters
-          </mat-error>
-          <mat-error *ngIf="signupForm.get('password')?.errors?.['pattern']">
-            Password must contain only allowed characters
-          </mat-error>
-        </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" required />
+        <mat-error *ngIf="signupForm.get('password')?.errors?.['required']">
+          Password is required
+        </mat-error>
+        <mat-error *ngIf="signupForm.get('password')?.errors?.['minlength']">
+          Password must be at least 8 characters
+        </mat-error>
+        <mat-error *ngIf="signupForm.get('password')?.errors?.['pattern']">
+          Password must contain only allowed characters
+        </mat-error>
+      </mat-form-field>
 
-        <mat-form-field class="full-width">
-          <mat-label>Confirm Password</mat-label>
-          <input
-            matInput
-            type="password"
-            formControlName="confirmPassword"
-            required
-          />
-          <mat-error *ngIf="signupForm.errors?.['passwordMismatch']">
-            Passwords do not match
-          </mat-error>
-        </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Confirm Password</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="confirmPassword"
+          required
+        />
+        <mat-error *ngIf="signupForm.errors?.['passwordMismatch']">
+          Passwords do not match
+        </mat-error>
+      </mat-form-field>
 
-        <div class="requirements">
-          <p>Requirements:</p>
-          <ul>
-            <li>Username: Only alphanumeric characters</li>
-            <li>Password: Minimum 8 characters</li>
-            <li>
-              Allowed characters: alphanumeric and #&#64;&"'(§!)°-_{{
-                "{}"
-              }}$€%£?;.:/\=+
-            </li>
-          </ul>
-        </div>
+      <div class="requirements">
+        <p>Requirements:</p>
+        <ul>
+          <li>Username: Only alphanumeric characters</li>
+          <li>Password: Minimum 8 characters</li>
+          <li>
+            Allowed characters: alphanumeric and #&#64;&"'(§!)°-_{{
+              "{}"
+            }}$€%£?;.:/\=+
+          </li>
+        </ul>
+      </div>
 
-        <div class="error-message" *ngIf="error">
-          {{ error }}
-        </div>
+      <div class="error-message" *ngIf="error">
+        {{ error }}
+      </div>
 
-        <div class="button-container">
-          <button
-            mat-raised-button
-            color="primary"
-            type="submit"
-            [disabled]="signupForm.invalid || isLoading"
-          >
-            {{ isLoading ? "Signing up..." : "Sign Up" }}
-          </button>
-          <button
-            mat-button
-            type="button"
-            (click)="goToSignin()"
-            [disabled]="isLoading"
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
-    </mat-card-content>
-  </mat-card>
-</div>
+      <div class="button-container">
+        <button
+          mat-flat-button
+          color="primary"
+          type="submit"
+          [disabled]="signupForm.invalid || isLoading"
+        >
+          {{ isLoading ? "Signing up..." : "Sign Up" }}
+        </button>
+        <button
+          mat-button
+          type="button"
+          (click)="goToSignin()"
+          [disabled]="isLoading"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

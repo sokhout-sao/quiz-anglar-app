@@ -1,6 +1,7 @@
-@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
 
-html, body { 
+html,
+body {
   height: 100%;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -10,8 +11,10 @@ html, body {
   width: 100%;
 }
 
-.container {
-  padding: 20px;
+.header {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .flex-spacer {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { QuizService, Quiz, Question } from "../../services/quiz.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Question, Quiz, QuizService } from "../../services/quiz.service";
 
 @Component({
   selector: "app-quiz-play",
@@ -31,51 +31,11 @@ export class QuizPlayComponent implements OnInit {
   }
 
   selectRandomQuestion() {
-    if (!this.quiz?.questions.length) {
-      return;
-    }
-
-    // If there's only one question, keep showing it
-    if (this.quiz.questions.length === 1) {
-      this.currentQuestion = this.quiz.questions[0];
-      this.showAnswer = false;
-      return;
-    }
-
-    const weights = {
-      UNKNOWN: 0.4,
-      BAD: 0.3,
-      MODERATE: 0.2,
-      GOOD: 0.1,
-    };
-
-    // Filter out the current question
-    const availableQuestions = this.quiz.questions.filter(
-      (q) => q !== this.currentQuestion
+    this.currentQuestion = this.quizService.getRandomQuestion(
+      this.quiz,
+      this.currentQuestion
     );
-
-    // Calculate total weight excluding current question
-    const totalWeight = availableQuestions.reduce(
-      (sum, q) => sum + weights[q.responseLevel],
-      0
-    );
-    let random = Math.random() * totalWeight;
-
-    // Select a new question using weighted random selection
-    for (const question of availableQuestions) {
-      random -= weights[question.responseLevel];
-      if (random <= 0) {
-        this.currentQuestion = question;
-        this.showAnswer = false;
-        break;
-      }
-    }
-
-    // Fallback in case no question was selected (shouldn't happen, but just in case)
-    if (!this.currentQuestion) {
-      this.currentQuestion = availableQuestions[0];
-      this.showAnswer = false;
-    }
+    this.showAnswer = false;
   }
 
   async updateResponseLevel(level: "GOOD" | "MODERATE" | "BAD") {

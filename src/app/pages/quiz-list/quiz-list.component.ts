@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { Router } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
-import { QuizService, Quiz } from "../../services/quiz.service";
+import { Quiz, QuizService } from "../../services/quiz.service";
 
 @Component({
   selector: "app-quiz-list",
@@ -31,22 +31,18 @@ export class QuizListComponent implements OnInit {
   }
 
   createQuiz($event: Event) {
-    $event.stopPropagation();
     this.router.navigate(["/quizzes/create"]);
   }
 
   editQuiz($event: Event, quiz: Quiz) {
-    $event.stopPropagation();
     this.router.navigate(["/quizzes/edit", quiz.id]);
   }
 
   playQuiz($event: Event, quiz: Quiz) {
-    $event?.stopPropagation();
     this.router.navigate(["/quizzes/play", quiz.id]);
   }
 
   async deleteQuiz($event: Event, quiz: Quiz) {
-    $event.stopPropagation();
     if (quiz.id && confirm("Are you sure you want to delete this quiz?")) {
       await this.quizService.deleteQuiz(quiz.id);
       await this.loadQuizzes();

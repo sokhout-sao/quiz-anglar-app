@@ -1,57 +1,56 @@
-<div class="container">
-  <mat-card *ngIf="currentQuestion">
-    <div class="header-actions">
-      <button mat-button (click)="goBack()">
-        <mat-icon>arrow_back</mat-icon>
-        Back
-      </button>
-      <button mat-button (click)="nextQuestion()">
-        <mat-icon>skip_next</mat-icon>
-        Next Question
-      </button>
-    </div>
+<mat-card *ngIf="currentQuestion" appearance="outlined">
+  <mat-card-header class="header">
+    <button mat-flat-button type="button" (click)="goBack()" color="accent">
+      <mat-icon>arrow_back</mat-icon>
+      Back
+    </button>
+    <span class="flex-spacer quiz-title">{{ quiz?.title }}</span>
+    <button mat-flat-button color="primary" (click)="nextQuestion()">
+      <mat-icon>skip_next</mat-icon>
+      Next Question
+    </button>
+  </mat-card-header>
 
-    <mat-card-content>
-      <div class="question-content">
-        <h2 class="question-text">{{ currentQuestion.sentence }}</h2>
+  <mat-card-content>
+    <div class="question-content">
+      <h2 class="question-text">{{ currentQuestion.sentence }}</h2>
 
-        <div *ngIf="!showAnswer" class="show-answer-section">
-          <button mat-raised-button color="primary" (click)="showAnswer = true">
-            See Response
-          </button>
-        </div>
+      <div *ngIf="!showAnswer" class="show-answer-section">
+        <button mat-flat-button color="primary" (click)="showAnswer = true">
+          See Response
+        </button>
+      </div>
 
-        <div *ngIf="showAnswer" class="answer-section">
-          <div class="answer-text">{{ currentQuestion.response }}</div>
+      <div *ngIf="showAnswer" class="answer-section">
+        <div class="answer-text">{{ currentQuestion.response }}</div>
 
-          <div class="response-level-section">
-            <p>How well did you know this answer?</p>
-            <div class="response-buttons">
-              <button
-                mat-raised-button
-                color="primary"
-                (click)="updateResponseLevel('GOOD')"
-              >
-                Good
-              </button>
-              <button
-                mat-raised-button
-                color="accent"
-                (click)="updateResponseLevel('MODERATE')"
-              >
-                Moderate
-              </button>
-              <button
-                mat-raised-button
-                color="warn"
-                (click)="updateResponseLevel('BAD')"
-              >
-                Bad
-              </button>
-            </div>
+        <div class="response-level-section">
+          <p>How well did you know this answer?</p>
+          <div class="response-buttons">
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="updateResponseLevel('GOOD')"
+            >
+              Good
+            </button>
+            <button
+              mat-flat-button
+              color="accent"
+              (click)="updateResponseLevel('MODERATE')"
+            >
+              Moderate
+            </button>
+            <button
+              mat-flat-button
+              color="warn"
+              (click)="updateResponseLevel('BAD')"
+            >
+              Bad
+            </button>
           </div>
         </div>
       </div>
-    </mat-card-content>
-  </mat-card>
-</div>
+    </div>
+  </mat-card-content>
+</mat-card>
